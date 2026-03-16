@@ -1,5 +1,10 @@
 # CLAUDE.md — Agent Context for 4BL Final Lab Report
 
+## Git Workflow
+- After completing each discrete task, create a git commit with a descriptive message
+- Push to remote (`git push`) after each commit
+- Commit messages should summarize what section/feature was added or changed
+
 ## Project Type
 This is an **undergraduate college lab report** for Physics 4BL.
 - It is NOT a graduate-level paper
