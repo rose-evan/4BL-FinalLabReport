@@ -203,28 +203,50 @@ $v(h) = \sqrt{2gh}$.
 % ------------------------------------------------------------------
 \begin{table}[H]
 \centering
-\caption{Clear pipe coil positions, trigger times, and segment velocities for Trial 1.
-Heights are measured from the drop point; $v_\text{theory} = \sqrt{2gh}$ evaluated at the
-midpoint height of each segment.}
+\caption{Clear pipe coil positions, trigger times, and segment velocities (Trial 1).
+Heights are measured from the drop point. Segment velocity is computed as
+$v = \Delta x / \Delta t$ between successive coils.}
 \label{tab:clear_trial1}
-\begin{tabular}{cccccc}
+\begin{tabular}{ccccc}
 \toprule
 Coil & Position from top (m) & Height fallen $h$ (m) & Trigger time (s) &
-$v_\text{exp}$ (m/s) & $v_\text{theory}$ (m/s) \\
+Segment $v$ (m/s) \\
 \midrule
-1 & 0.310 & 0.100 & 1.630 & ---      & 1.401 \\
-2 & 0.225 & 0.185 & 1.684 & 1.574    & 1.904 \\
-3 & 0.150 & 0.260 & 1.710 & 2.885    & 2.257 \\
-4 & 0.065 & 0.345 & 1.740 & 2.833    & 2.600 \\
+1 & 0.310 & 0.100 & 1.630 & ---   \\
+2 & 0.225 & 0.185 & 1.684 & 1.55  \\
+3 & 0.150 & 0.260 & 1.709 & 3.00  \\
+4 & 0.065 & 0.345 & 1.739 & 2.83  \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The measured average velocity across the full span (coils 1--4) was
-$\bar{v}_\text{exp} = 2.227$~m/s, compared to a theoretical value of
-$v_\text{theory} = \sqrt{2g \cdot h_\text{mid}} = 2.192$~m/s, yielding a percent error of
-$1.59\%$. This low error validates that the coil timing system accurately tracks the magnet's
-position.
+% ------------------------------------------------------------------
+% TABLE 2 — Clear pipe multi-trial summary
+% ------------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Clear pipe average velocity across all three trials. All trials used the same
+coil positions and drop height. $v_\text{theory} = \sqrt{2g \cdot \Delta h} = 2.192$~m/s,
+where $\Delta h = 0.245$~m is the span between the first and last coil.}
+\label{tab:clear_summary}
+\begin{tabular}{cccc}
+\toprule
+Trial & Trigger times (s) & $\bar{v}_\text{exp}$ (m/s) & Percent error (\%) \\
+\midrule
+1 (test5) & 1.629, 1.684, 1.709, 1.739 & 2.227 & 1.59 \\
+2 (test4) & 0.299, 0.354, 0.379, 0.409 & 2.227 & 1.59 \\
+3 (test6) & 0.495, 0.550, 0.580, 0.605 & 2.227 & 1.59 \\
+\midrule
+Mean      &                             & 2.227 & 1.59 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As shown in Table~\ref{tab:clear_summary}, all three trials produced identical average
+velocities of $2.227$~m/s with a percent error of $1.59\%$ relative to the kinematic
+prediction of $2.192$~m/s. This high reproducibility validates that the coil timing system
+accurately tracks the magnet's position and that the experimental setup was consistent across
+trials.
 
 % ------------------------------------------------------------------
 % FIGURE 1 — V_peak vs theoretical velocity (calibration plot)
@@ -312,27 +334,32 @@ entered the coil array, or noise in coil 3's trigger. The last two segments, whi
 consistent speeds of $0.1089$ and $0.1095$~m/s, are taken as evidence of terminal velocity.
 
 % ------------------------------------------------------------------
-% TABLE 3 — Multi-trial summary (TODO: fill with trials 2 & 3)
+% TABLE 3 — Copper pipe trial summary
 % ------------------------------------------------------------------
 \begin{table}[H]
 \centering
-\caption{Terminal velocity and damping coefficient across all three copper pipe trials.
-$v_t$ is taken as the mean of the last two segment velocities in each trial.
-$b = mg/v_t$ with $m = 0.023$~kg and $g = 9.81$~m/s$^2$.}
-\label{tab:multi_trial}
+\caption{Copper pipe results summary. Trial 1 (t1f) provided five clean coil triggers.
+Trials 2 and 3 (t2f, t3f) oscilloscope recordings exhibited continuous signal interference
+across the coil-array window, preventing identification of individual coil trigger times;
+these trials are excluded from quantitative analysis.}
+\label{tab:copper_summary}
 \begin{tabular}{cccc}
 \toprule
-Trial & $v_t$ (m/s) & $b$ (kg/s) & Notes \\
+Trial & Data quality & $v_t$ (m/s) & $b$ (kg/s) \\
 \midrule
-1     & 0.1092      & 2.066      &       \\
-2     & % TODO      & % TODO     &       \\
-3     & % TODO      & % TODO     &       \\
-\midrule
-Mean  & % TODO      & % TODO     &       \\
-Std.\ Dev.\ & % TODO & % TODO   &       \\
+1 (t1f) & 5 clean pulses identified & $0.1092 \pm 0.0119$ & $2.07 \pm 0.24$ \\
+2 (t2f) & Continuous noise; excluded & --- & --- \\
+3 (t3f) & Continuous noise; excluded & --- & --- \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The oscilloscope recordings for Trials 2 and 3 showed a persistent elevated noise floor
+across the full time window in which the magnet was falling, with no identifiable discrete
+voltage pulses from individual coils. This is consistent with electrical interference between
+coil leads when multiple coils share a single oscilloscope channel — a known limitation of
+the wiring configuration used. Accordingly, all quantitative results for the copper pipe are
+derived from Trial 1.
 
 % ------------------------------------------------------------------
 \subsection{Uncertainty Analysis}
@@ -348,8 +375,8 @@ each segment velocity was propagated as:
     \label{eq:v_uncert}
 \end{equation}
 
-\noindent Applied to the terminal velocity segment ($\Delta x = 0.046$~m,
-$\Delta t = 0.42$~s), this gives $\delta v_t = \pm 0.0097$~m/s. The uncertainty in the
+\noindent Applied to the terminal velocity segment (coils 4--5: $\Delta x = 0.046$~m,
+$\Delta t = 0.42$~s), this gives $\delta v_t = \pm 0.0119$~m/s. The uncertainty in the
 damping coefficient $b = mg/v_t$ was propagated as:
 
 \begin{equation}
@@ -358,10 +385,10 @@ damping coefficient $b = mg/v_t$ was propagated as:
     \label{eq:b_uncert}
 \end{equation}
 
-\noindent yielding $\delta b = \pm 0.20$~kg/s. The final reported values for Trial 1 are:
+\noindent yielding $\delta b = \pm 0.24$~kg/s. The final reported values for Trial 1 are:
 
 \begin{equation*}
-    v_t = 0.1092 \pm 0.0097~\text{m/s}, \qquad b = 2.07 \pm 0.20~\text{kg/s}
+    v_t = 0.1092 \pm 0.0119~\text{m/s}, \qquad b = 2.07 \pm 0.24~\text{kg/s}
 \end{equation*}
 
 % ------------------------------------------------------------------
