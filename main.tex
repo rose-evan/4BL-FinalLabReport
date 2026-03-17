@@ -210,11 +210,12 @@ coil consisted of approximately 45 turns.
     \label{fig:coils}
 \end{figure}
 
-These coils were positioned at measured vertical intervals along the tubes. The signals
-were processed using an ESP32 microcontroller, which utilized a fast ADC sampling routine
-to detect the induced electromotive force ($\mathcal{E}$) as the magnet passed through
-each coil. The system used a threshold trigger to capture the peak induced voltage
-($V_\text{peak}$) and the associated timestamp for each event.
+These coils were positioned at measured vertical intervals along the tubes. Four coils were
+used during the clear pipe calibration phase; all five were used during the copper pipe
+damping test. The signals were processed using an ESP32 microcontroller, which utilized a
+fast ADC sampling routine to detect the induced electromotive force ($\mathcal{E}$) as the
+magnet passed through each coil. The system used a threshold trigger to capture the peak
+induced voltage ($V_\text{peak}$) and the associated timestamp for each event.
 
 \subsection{Calibration Phase (Clear Tube)}
 
@@ -275,7 +276,7 @@ in the $V_\text{peak}$ values across successive coils.
 \subsection{Phase 1: Clear Pipe Calibration}
 
 The clear plastic tube served as a control in which the magnet fell freely with no magnetic
-braking. Five sensing coils were positioned at measured distances from the top of the tube.
+braking. Four sensing coils were positioned at measured distances from the top of the tube.
 The trigger time at each coil was recorded by the ESP32, and the average velocity between
 successive coils was computed as $v = \Delta x / \Delta t$. Because the magnet is in free fall,
 the velocity at drop height $h$ is predicted by kinematics (Equation~\ref{eq:freefall}):
