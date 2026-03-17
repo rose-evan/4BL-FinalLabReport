@@ -230,13 +230,15 @@ Figure~\ref{fig:clear_setup}.
     \label{fig:clear_setup}
 \end{figure}
 
-In the absence of magnetic braking, the magnet followed standard free-fall kinematics
-where the velocity at any height $h$ is given by Equation~\ref{eq:freefall}:
-$v(h) = \sqrt{2gh}$. Since $V_\text{peak}$ is linearly proportional to the instantaneous
-velocity (Equation~\ref{eq:vpeak}), the data from the clear tube was used to plot
-$V_\text{peak}$ against $\sqrt{h}$. This linear relationship allowed for the calculation
-of a calibration constant, ensuring that subsequent voltage readings from the copper pipe
-could be accurately converted into velocity values in meters per second.
+The magnet was released by hand from the top of the tube. In the absence of magnetic
+braking, it followed standard free-fall kinematics where the velocity at drop height $h$
+(measured from the release point at the tube entrance) is given by
+Equation~\ref{eq:freefall}: $v(h) = \sqrt{2gh}$. Since $V_\text{peak}$ is linearly
+proportional to the instantaneous velocity (Equation~\ref{eq:vpeak}), the data from the
+clear tube was used to plot $V_\text{peak}$ against $\sqrt{h}$. This linear relationship
+allowed for the calculation of a calibration constant, ensuring that subsequent voltage
+readings from the copper pipe could be accurately converted into velocity values in meters
+per second.
 
 \subsection{Damping Test (Copper Pipe)}
 
@@ -288,8 +290,9 @@ $v(h) = \sqrt{2gh}$.
 \begin{table}[H]
 \centering
 \caption{Clear pipe coil positions, trigger times, theoretical free-fall velocities, and
-propagated segment velocity uncertainties (Trial 1). Heights $h$ are measured from the
-drop point; $v_\text{theory} = \sqrt{2gh}$ is the predicted free-fall speed at each coil.
+propagated segment velocity uncertainties (Trial 1). Position is measured from the bottom
+of the tube; $h$ is the drop height measured from the release point at the top of the
+tube. $v_\text{theory} = \sqrt{2gh}$ is the predicted free-fall speed at each coil.
 Segment velocity $v = \Delta x / \Delta t$ between successive coils; uncertainty
 propagated via Equation~\ref{eq:v_uncert} with $\delta x = 0.005$~m and
 $\delta t = 0.002$~s.}
@@ -403,7 +406,7 @@ segment velocities for Trial 1.
 \begin{table}[H]
 \centering
 \caption{Copper pipe coil positions, trigger times, segment velocities, and propagated
-uncertainties for Trial 1. Distances are measured from the top of the pipe.
+uncertainties for Trial 1. Positions are measured from the bottom of the pipe.
 Uncertainty propagated via Equation~\ref{eq:v_uncert}; the large relative uncertainty
 for segment 2--3 reflects its short spacing ($\Delta x = 0.038$~m).}
 \label{tab:copper_trial1}
