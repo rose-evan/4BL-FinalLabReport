@@ -182,8 +182,82 @@ increase in proportion to $\sqrt{h}$, consistent with free fall.
 \section{Methods and Experimental Setup}
 \label{sec:methods}
 
-% TODO: Describe apparatus, procedure, calibration, controlled/measured variables.
-% Include at least one labeled diagram or photograph.
+The experimental objective was to measure the magnetic damping of a neodymium magnet
+falling through a conductive tube and compare its velocity profile to a free-fall control
+group. The setup was designed to isolate the effects of eddy current braking from standard
+gravitational acceleration.
+
+\subsection{Apparatus and Component Design}
+
+The primary apparatus consisted of two vertical tubes of identical diameter: one clear
+plastic tube to serve as a non-conductive control and one copper tube to act as the
+conductive medium. To detect the motion of the magnet, five induction coils were
+constructed using stranded magnet wire. Each coil consisted of approximately 45 turns.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/IMG_7903.jpeg}
+    \caption{Handmade induction coils consisting of approximately 45 turns of stranded
+    wire each.}
+    \label{fig:coils}
+\end{figure}
+
+These coils were positioned at measured vertical intervals along the tubes. The signals
+were processed using an ESP32 microcontroller, which utilized a fast ADC sampling routine
+to detect the induced electromotive force ($\mathcal{E}$) as the magnet passed through
+each coil. The system used a threshold trigger to capture the peak induced voltage
+($V_\text{peak}$) and the associated timestamp for each event.
+
+\subsection{Calibration Phase (Clear Tube)}
+
+The first stage of the experiment involved the non-conductive plastic setup to establish
+a baseline and determine the sensor calibration constant.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth, angle=270]{images/IMG_7901.jpeg}
+    \caption{Experimental setup using the clear plastic tube for free-fall calibration.}
+    \label{fig:clear_setup}
+\end{figure}
+
+In the absence of magnetic braking, the magnet followed standard free-fall kinematics
+where the velocity at any height $h$ is given by Equation~\ref{eq:freefall}:
+$v(h) = \sqrt{2gh}$. Since $V_\text{peak}$ is linearly proportional to the instantaneous
+velocity (Equation~\ref{eq:vpeak}), the data from the clear tube was used to plot
+$V_\text{peak}$ against $\sqrt{h}$. This linear relationship allowed for the calculation
+of a calibration constant, ensuring that subsequent voltage readings from the copper pipe
+could be accurately converted into velocity values in meters per second.
+
+\subsection{Damping Test (Copper Pipe)}
+
+In the second stage, the induction coils were transferred to the copper pipe. The magnet
+was dropped from the same initial height used during the calibration phase to maintain
+consistency in gravitational potential energy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/copper.png}
+    \caption{Experimental setup using the copper pipe to measure magnetic damping and
+    terminal velocity.}
+    \label{fig:copper_setup}
+\end{figure}
+
+As the neodymium magnet fell through the copper, the changing magnetic flux induced eddy
+currents in the pipe wall. According to Lenz's Law, these currents generated a resistive
+force $F_d = -bv$ (Equation~\ref{eq:drag}). The experiment sought to identify the point
+at which this drag force equaled the gravitational force ($mg$), resulting in a terminal
+velocity $v_t$ (Equation~\ref{eq:terminal}). This was detected by monitoring for a plateau
+in the $V_\text{peak}$ values across successive coils.
+
+\subsection{Summary of Variables}
+\begin{itemize}
+    \item \textbf{Independent variable:} The conductivity of the pipe material
+    (plastic vs.\ copper).
+    \item \textbf{Dependent variable:} The peak induced voltage ($V_\text{peak}$)
+    measured in millivolts.
+    \item \textbf{Controlled variables:} Magnet strength, number of coil turns
+    ($N \approx 45$), pipe diameter, and initial drop height.
+\end{itemize}
 
 %--------------------------------------------------------------------------
 \section{Results and Analysis}
