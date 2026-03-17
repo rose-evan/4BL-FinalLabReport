@@ -119,7 +119,7 @@ $d\Phi_B/dz$ is a geometric constant determined by the coil and magnet geometry,
 induced voltage is directly proportional to velocity:
 
 \begin{equation}
-    V_{peak} \propto v
+    V_\text{peak} \propto v
     \label{eq:vpeak}
 \end{equation}
 
@@ -175,13 +175,13 @@ signature of terminal velocity.
 
 \subsection*{Hypothesis}
 
-We hypothesize that as a neodymium magnet falls through the conductive copper pipe, the
-changing magnetic flux will induce eddy currents in the pipe walls. These eddy currents will
-generate an opposing magnetic drag force that substantially slows the magnet's descent,
-ultimately driving it to a terminal velocity far below free-fall speeds. This terminal velocity
-should be detectable as a plateau in $V_\text{peak}$ across successive sensing coils, while in the
-non-conductive plastic tube --- where no eddy currents form --- $V_\text{peak}$ will continue to
-increase in proportion to $\sqrt{h}$, consistent with free fall.
+We hypothesized that as a neodymium magnet fell through the conductive copper pipe, the
+changing magnetic flux would induce eddy currents in the pipe walls. These eddy currents were
+expected to generate an opposing magnetic drag force that substantially slowed the magnet's
+descent, ultimately driving it to a terminal velocity far below free-fall speeds. This terminal
+velocity was expected to appear as a plateau in $V_\text{peak}$ across successive sensing coils,
+while in the non-conductive plastic tube --- where no eddy currents form --- $V_\text{peak}$ was
+predicted to increase in proportion to $\sqrt{h}$, consistent with free fall.
 
 %--------------------------------------------------------------------------
 \section{Methods and Experimental Setup}
@@ -194,12 +194,13 @@ gravitational acceleration.
 
 \subsection{Apparatus and Component Design}
 
-The primary apparatus consisted of two vertical tubes of identical inner diameter
-(\textasciitilde22~mm): one clear plastic tube to serve as a non-conductive control and one
-copper tube to act as the conductive medium. The neodymium disc magnet used had a mass of
-approximately 23~g and a diameter slightly smaller than the tube bore, allowing it to fall
-freely without contacting the walls. To detect the motion of the magnet, five induction coils
-were constructed using stranded magnet wire. Each coil consisted of approximately 45 turns.
+The primary apparatus consisted of two vertical tubes of identical length (41~cm) and inner
+diameter (\textasciitilde22~mm): one clear plastic tube to serve as a non-conductive control
+and one copper tube to act as the conductive medium. The neodymium disc magnet used had a
+mass of approximately 23~g and a diameter slightly smaller than the tube bore, allowing it to
+fall freely without contacting the walls. To detect the motion of the magnet, five induction
+coils were constructed using stranded magnet wire, as shown in Figure~\ref{fig:coils}. Each
+coil consisted of approximately 45 turns.
 
 \begin{figure}[H]
     \centering
@@ -218,7 +219,8 @@ each coil. The system used a threshold trigger to capture the peak induced volta
 \subsection{Calibration Phase (Clear Tube)}
 
 The first stage of the experiment involved the non-conductive plastic setup to establish
-a baseline and determine the sensor calibration constant.
+a baseline and determine the sensor calibration constant, as shown in
+Figure~\ref{fig:clear_setup}.
 
 \begin{figure}[H]
     \centering
@@ -237,9 +239,9 @@ could be accurately converted into velocity values in meters per second.
 
 \subsection{Damping Test (Copper Pipe)}
 
-In the second stage, the induction coils were transferred to the copper pipe. The magnet
-was dropped from the same initial height used during the calibration phase to maintain
-consistency in gravitational potential energy.
+In the second stage, the induction coils were transferred to the copper pipe, as shown in
+Figure~\ref{fig:copper_setup}. The magnet was dropped from the same initial height used
+during the calibration phase to maintain consistency in gravitational potential energy.
 
 \begin{figure}[H]
     \centering
@@ -261,7 +263,7 @@ in the $V_\text{peak}$ values across successive coils.
     \item \textbf{Independent variable:} The conductivity of the pipe material
     (plastic vs.\ copper).
     \item \textbf{Dependent variable:} The peak induced voltage ($V_\text{peak}$)
-    measured in millivolts.
+    measured in raw ADC counts from the ESP32's analog-to-digital converter.
     \item \textbf{Controlled variables:} Magnet strength, number of coil turns
     ($N \approx 45$), pipe diameter, and initial drop height.
 \end{itemize}
