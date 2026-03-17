@@ -215,7 +215,20 @@ used during the clear pipe calibration phase; all five were used during the copp
 damping test. The signals were processed using an ESP32 microcontroller, which utilized a
 fast ADC sampling routine to detect the induced electromotive force ($\mathcal{E}$) as the
 magnet passed through each coil. The system used a threshold trigger to capture the peak
-induced voltage ($V_\text{peak}$) and the associated timestamp for each event.
+induced voltage ($V_\text{peak}$) and the associated timestamp for each event. The coil
+signals were simultaneously monitored on a Tektronix TBS 1052B-EDU digital oscilloscope
+(50~MHz, 1~GS/s), as shown in Figure~\ref{fig:oscilloscope}, which provided a real-time
+view of the induced voltage pulses as the magnet passed each coil.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/oscilloscope.jpeg}
+    \caption{Tektronix TBS 1052B-EDU digital oscilloscope used to monitor the induced
+    voltage signal from the sensing coils. Each voltage pulse corresponds to the magnet
+    passing through one coil. The 500~ms time scale and 20~mV vertical scale were used
+    across all trials.}
+    \label{fig:oscilloscope}
+\end{figure}
 
 \subsection{Calibration Phase (Clear Tube)}
 
