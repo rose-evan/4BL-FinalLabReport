@@ -62,17 +62,19 @@
 
 %--------------------------------------------------------------------------
 \begin{abstract}
-Our team's experiment investigates the effect of eddy currents on a magnet falling through a
-conductive copper pipe. Faraday's Law of Induction and Lenz's Law predict that the changing
-magnetic flux produced by the falling magnet induces circulating currents within the copper pipe,
-which in turn generate opposing magnetic fields. These opposing fields produce a magnetic drag
-force that significantly slows the magnet's descent. We tested this prediction by dropping a
-permanent magnet through both a plastic tube and a copper pipe of equal length. The magnet
-falling through the plastic tube experienced normal free fall, while the magnet in the copper pipe
-fell substantially slower. The measured average velocity through the copper pipe was
-$0.10 \pm 0.01$~m/s, compared to $2.10 \pm 0.05$~m/s through the plastic tube. This result
-supports our hypothesis that eddy currents generated in the copper pipe produce an induced
-magnetic drag force that opposes and greatly reduces the magnet's downward velocity.
+This experiment investigated the effect of eddy currents on a neodymium magnet falling through
+a conductive copper pipe. Faraday's Law of Induction and Lenz's Law predicted that the
+changing magnetic flux from the falling magnet would induce circulating currents in the copper
+pipe walls, generating an opposing magnetic field and a velocity-dependent braking force. We
+tested this by dropping the magnet through a clear plastic tube as a free-fall control and through
+a copper pipe of the same length, recording trigger times at five handmade induction coils using
+an ESP32 microcontroller. The average velocity through the plastic tube was
+$2.23 \pm 0.06$~m/s, consistent with the kinematic free-fall prediction of $2.19$~m/s to within
+$1.6\%$. Through the copper pipe, the magnet reached a terminal velocity of
+$v_t = 0.109 \pm 0.012$~m/s --- roughly 20 times slower --- corresponding to a magnetic drag
+coefficient of $b = 2.07 \pm 0.24$~kg/s. These results supported our hypothesis that eddy
+currents in the copper pipe generated a drag force sufficient to drive the magnet to a well-defined
+terminal velocity.
 \end{abstract}
 
 \medskip
@@ -86,10 +88,13 @@ magnetic drag force that opposes and greatly reduces the magnet's downward veloc
 As a magnet moves through a conducting material, its changing magnetic field induces
 circulating currents within the conductor known as \textit{eddy currents}. Eddy currents arise
 from electromagnetic induction and, by Lenz's Law, always act to oppose the change that created
-them. This experiment exploits the so-called \textit{generator effect}: a moving magnet acts like
-a generator, inducing a measurable voltage in a stationary sensing coil. By placing several coils
-at known positions along a tube, the instantaneous velocity of the falling magnet can be tracked
-at each coil location.
+them. This braking effect is directly applied in technologies such as electromagnetic braking
+systems in roller coasters and high-speed trains, eddy current separators in recycling, and
+non-destructive material testing --- making a controlled laboratory study of the phenomenon
+both practical and physically instructive. This experiment exploits the so-called
+\textit{generator effect}: a moving magnet acts like a generator, inducing a measurable voltage
+in a stationary sensing coil. By placing several coils at known positions along a tube, the
+instantaneous velocity of the falling magnet can be tracked at each coil location.
 
 \subsection*{Faraday's Law and the Voltage--Velocity Relationship}
 
@@ -132,7 +137,7 @@ At a drop height $h$ below the release point, conservation of energy gives:
     \label{eq:freefall}
 \end{equation}
 
-\noindent where $g = 9.81~\text{m/s}^2$. Because $v \propto \sqrt{h}$, a plot of $V_{peak}$
+\noindent where $g = 9.81~\text{m/s}^2$. Because $v \propto \sqrt{h}$, a plot of $V_\text{peak}$
 versus $\sqrt{h}$ for the plastic tube should be linear. This linear fit calibrates each sensing
 coil, establishing the conversion factor between measured voltage and instantaneous velocity.
 
@@ -165,7 +170,7 @@ force is zero and the magnet travels at a constant terminal velocity:
 \end{equation}
 
 \noindent At terminal velocity, successive coils along the copper pipe record the same
-$V_{peak}$, producing a plateau in the voltage profile. This plateau is the experimental
+$V_\text{peak}$, producing a plateau in the voltage profile. This plateau is the experimental
 signature of terminal velocity.
 
 \subsection*{Hypothesis}
@@ -174,8 +179,8 @@ We hypothesize that as a neodymium magnet falls through the conductive copper pi
 changing magnetic flux will induce eddy currents in the pipe walls. These eddy currents will
 generate an opposing magnetic drag force that substantially slows the magnet's descent,
 ultimately driving it to a terminal velocity far below free-fall speeds. This terminal velocity
-should be detectable as a plateau in $V_{peak}$ across successive sensing coils, while in the
-non-conductive plastic tube --- where no eddy currents form --- $V_{peak}$ will continue to
+should be detectable as a plateau in $V_\text{peak}$ across successive sensing coils, while in the
+non-conductive plastic tube --- where no eddy currents form --- $V_\text{peak}$ will continue to
 increase in proportion to $\sqrt{h}$, consistent with free fall.
 
 %--------------------------------------------------------------------------
@@ -189,10 +194,12 @@ gravitational acceleration.
 
 \subsection{Apparatus and Component Design}
 
-The primary apparatus consisted of two vertical tubes of identical diameter: one clear
-plastic tube to serve as a non-conductive control and one copper tube to act as the
-conductive medium. To detect the motion of the magnet, five induction coils were
-constructed using stranded magnet wire. Each coil consisted of approximately 45 turns.
+The primary apparatus consisted of two vertical tubes of identical inner diameter
+(\textasciitilde22~mm): one clear plastic tube to serve as a non-conductive control and one
+copper tube to act as the conductive medium. The neodymium disc magnet used had a mass of
+approximately 23~g and a diameter slightly smaller than the tube bore, allowing it to fall
+freely without contacting the walls. To detect the motion of the magnet, five induction coils
+were constructed using stranded magnet wire. Each coil consisted of approximately 45 turns.
 
 \begin{figure}[H]
     \centering
@@ -335,9 +342,11 @@ position and that the experimental setup was consistent across trials.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/calibration_vpeak_vs_v.png}
-    \caption{Calibration curve: peak induced ADC voltage ($V_\text{peak}$) versus theoretical
-    free-fall velocity at each coil position (clear pipe, Trial 1). The orange line is a
-    linear fit with slope (calibration constant) $= 276.06$~ADC/(m/s). The strong
+    \caption{Calibration curve: peak induced voltage ($V_\text{peak}$) versus theoretical
+    free-fall velocity at each coil position (clear pipe, Trial 1). $V_\text{peak}$ is
+    reported in raw ADC counts --- the integer output of the ESP32's 12-bit
+    analog-to-digital converter, where 4095 counts corresponds to 3.3~V. The orange line
+    is a linear fit with slope (calibration constant) $k = 276.06$~ADC/(m/s). The strong
     linearity confirms $V_\text{peak} \propto v$, consistent with Faraday's Law
     (Equation~\ref{eq:faraday_chain}).}
     \label{fig:calibration}
@@ -427,17 +436,15 @@ monotonically as in free fall. Instead, it decelerates rapidly after entering th
 pipe and converges to a near-constant value. The segment speed dips to $0.058$~m/s between
 coils 2--3, then recovers and plateaus at approximately $0.109$~m/s for segments 3--4.
 
-The anomalously low velocity at segment 2--3 can be attributed to two compounding factors.
-First, that segment has the smallest inter-coil spacing in the array ($\Delta x = 0.038$~m),
-so position uncertainty alone contributes $\delta x / \Delta x \approx 13\%$ to the relative
-velocity error — larger than any other segment. Second, the magnetic braking force may
-transiently overshoot the equilibrium drag value as eddy currents first become fully
-established across the full cross-section of the pipe walls at the start of the magnet's
-passage. This type of transient overshoot is consistent with the equation of motion
-(Equation~\ref{eq:eom}), which predicts oscillatory approach to terminal velocity in the
-presence of inductive lag. The last two segments, showing consistent speeds of $0.1089$ and
-$0.1095$~m/s that differ by less than $1\%$, provide strong evidence that terminal velocity
-has been reached.
+The anomalously low velocity at segment 2--3 is most likely a measurement artifact rather
+than a physical effect. That segment has the smallest inter-coil spacing in the array
+($\Delta x = 0.038$~m), so position uncertainty alone contributes
+$\delta x / \Delta x \approx 13\%$ to the relative velocity error --- larger than any other
+segment. The equation of motion (Equation~\ref{eq:eom}) predicts an exponential approach to
+terminal velocity, not an oscillatory one, so the dip is not expected on physical grounds
+and is better explained by amplified measurement uncertainty at that narrow spacing. The last
+two segments, showing consistent speeds of $0.1089$ and $0.1095$~m/s that differ by less
+than $1\%$, provide strong evidence that terminal velocity had been reached.
 
 % ------------------------------------------------------------------
 % TABLE 3 — Copper pipe trial summary
@@ -521,30 +528,56 @@ uncertainties.
 \section{Conclusion}
 \label{sec:conclusion}
 
-% TODO: Summarize findings, state whether hypothesis was supported,
-% identify dominant error sources, suggest improvements.
+The results of this experiment supported our hypothesis. The neodymium magnet reached a
+terminal velocity of $v_t = 0.109 \pm 0.012$~m/s in the copper pipe, approximately 20 times
+slower than the free-fall average of $2.23 \pm 0.06$~m/s measured in the plastic control tube.
+The plateau in segment velocities across coils 4 and 5 (Table~\ref{tab:copper_trial1}) provided
+direct experimental evidence of terminal velocity, consistent with the prediction from
+Equation~\ref{eq:terminal}. From this, we calculated a magnetic drag coefficient of
+$b = 2.07 \pm 0.24$~kg/s. The calibration phase confirmed the reliability of our
+voltage-based velocity measurement, agreeing with the kinematic prediction to within $1.6\%$
+and directly verifying the $V_\text{peak} \propto v$ relationship (Figure~\ref{fig:calibration}).
+
+The dominant source of error was electrical interference between coil leads sharing a single
+oscilloscope channel, which rendered Trials 2 and 3 of the copper pipe phase entirely unusable.
+All terminal velocity results therefore rest on a single trial, which significantly limits the
+statistical reliability of the measured $v_t$ and $b$. A secondary error source was the uneven
+coil spacing --- particularly the narrow 3.8~cm gap between coils 2 and 3 --- which amplified
+position uncertainty and produced the anomalously low segment velocity of $0.058$~m/s in that
+region. The calibration constant $k$ also lacks a formal uncertainty because no fit error was
+extracted from the linear regression, which should be addressed in future analysis.
+
+To improve this experiment, future groups should use individually shielded coaxial cables for
+each coil to eliminate inter-channel interference, which would allow all trials to yield usable
+data and support a statistically meaningful average. More uniform coil spacing would reduce the
+sensitivity of segment velocity calculations to position uncertainty. A more consistent magnet
+release mechanism --- such as an electromagnet trigger --- would also reduce trial-to-trial
+variability. More broadly, this experiment could be extended by varying the conductivity of the
+pipe material or the magnet strength to test how $b$ scales with those parameters, which would
+allow a more complete comparison between the measured drag coefficient and theoretical
+predictions based on pipe geometry and conductivity.
 
 %--------------------------------------------------------------------------
 \begin{thebibliography}{9}
 
 \bibitem{young}
 H.~D.~Young and R.~A.~Freedman,
-\textit{University Physics with Modern Physics},
-Pearson.
+\textit{University Physics with Modern Physics}, 14th ed.
+Pearson, 2016.
 
 \bibitem{kingman}
 R.~Kingman, S.~C.~Rowland, and S.~Popescu,
 ``An inexpensive apparatus for studying magnetic braking,''
-\textit{American Journal of Physics}, 2002.
+\textit{American Journal of Physics}, vol.~70, no.~6, pp.~595--598, 2002.
 
 \bibitem{amrani}
 D.~Amrani and P.~Paradis,
-``Faraday's Law of Induction,''
-\textit{Physics Education}, 2006.
+``Faraday's law of electromagnetic induction,''
+\textit{Physics Education}, vol.~41, no.~1, pp.~57--61, 2006.
 
 \bibitem{labslides}
 UCLA Department of Physics and Astronomy,
-\textit{Physics 4BL Eddy Currents Lab Slides}.
+\textit{Physics 4BL Eddy Currents Lab Slides}, 2026.
 \url{https://docs.google.com/presentation/d/1IVAaQUsmQ_JzKlHtA8LTvoE786hzN1TOTGgljMnPf6I/edit}
 
 \end{thebibliography}
